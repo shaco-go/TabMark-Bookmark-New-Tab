@@ -2209,6 +2209,27 @@ input:checked+.slider:before {
   border-radius: 50%;
 }
 
+/* 暗黑模式下的开关样式 */
+[data-theme="dark"] .slider {
+  background-color: #4b5563; /* 深灰色背景 */
+}
+
+[data-theme="dark"] .slider:before {
+  background-color: #e5e7eb; /* 浅灰色圆点 */
+}
+
+[data-theme="dark"] input:checked+.slider {
+  background-color: #10b981; /* 保持绿色 */
+}
+
+[data-theme="dark"] input:checked+.slider:before {
+  background-color: #ffffff; /* 选中时圆点为白色 */
+}
+
+[data-theme="dark"] input:focus+.slider {
+  box-shadow: 0 0 1px #10b981;
+}
+
 /* 调整开关和标签的布局 */
 .setting-option {
   display: flex;
@@ -2219,6 +2240,20 @@ input:checked+.slider:before {
   background-color: #f8f9fa;
   border-radius: 8px;
   transition: background-color 0.2s;
+}
+
+/* 暗黑模式下的 setting-option */
+[data-theme="dark"] .setting-option {
+  background-color: #2d2d2d;
+  color: #e5e7eb;
+}
+
+[data-theme="dark"] .setting-option:hover {
+  background-color: #363636;
+}
+
+[data-theme="dark"] .switch-label {
+  color: #e5e7eb;
 }
 
 .switch-label {

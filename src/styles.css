@@ -1490,15 +1490,25 @@ body .default-folders-tabs.sidebar-expanded {
   margin-bottom: 0;
 }
 
+/* 搜索结果打开方式设置 */
+.search-opening-settings {
+  background: #f8f9fa;
+  border-radius: 8px;
+  margin-top: 1rem;
+  padding: 1rem;
+}
+
 /* 暗色模式适配 */
 [data-theme="dark"] .search-suggestions-settings {
   background: #2d2d2d;
 }
 
-
-
 [data-theme="dark"] .search-suggestions-settings .setting-option:hover {
   background-color: #404040;
+}
+
+[data-theme="dark"] .search-opening-settings {
+  background: #2d2d2d;
 }
 
 /* 修改设置侧边栏样式，使其不使用遮罩 */
@@ -1717,6 +1727,16 @@ body .default-folders-tabs.sidebar-expanded {
 .settings-tab-content p {
   font-size: 14px;
   margin-bottom: 1rem;
+}
+
+/* 暗色模式下段落文本颜色 */
+[data-theme="dark"] .settings-tab-content p {
+  color: #9ca3af;
+}
+
+/* 通用设置描述文本暗色模式 */
+[data-theme="dark"] .settings-description {
+  color: #9ca3af;
 }
 
 /* 赞赏页面样式 */
