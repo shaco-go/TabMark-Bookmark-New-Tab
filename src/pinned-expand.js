@@ -228,6 +228,10 @@ class PinnedExpandManager {
       this.renderPinnedExpand();
     } else {
       this.container.style.display = 'none';
+      // 禁用固定展开时，重新初始化固定主页功能
+      if (typeof window.initPinnedFolders === 'function') {
+        window.initPinnedFolders();
+      }
     }
   }
 

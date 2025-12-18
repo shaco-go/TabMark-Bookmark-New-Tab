@@ -12,7 +12,6 @@ class SettingsManager {
     this.tabButtons = document.querySelectorAll('.settings-tab-button');
     this.tabContents = document.querySelectorAll('.settings-tab-content');
     this.bgOptions = document.querySelectorAll('.settings-bg-option');
-    this.enableFloatingBallCheckbox = document.getElementById('enable-floating-ball');
     this.openInNewTabCheckbox = document.getElementById('open-in-new-tab');
     
     // 侧边栏模式下的链接打开方式设置元素可能不存在于所有页面
@@ -48,10 +47,6 @@ class SettingsManager {
     this.initTheme();
 
     // 只在相关元素存在时才调用各个初始化方法
-    if (this.enableFloatingBallCheckbox) {
-      this.initFloatingBallSettings();
-    }
-    
     if (this.openInNewTabCheckbox || this.sidepanelOpenInNewTabCheckbox || this.sidepanelOpenInSidepanelCheckbox) {
       this.initLinkOpeningSettings();
     }
@@ -61,12 +56,6 @@ class SettingsManager {
       this.initPinnedExpandSettings();
     }
 
-    // 检查书签管理相关元素
-    const bookmarkCleanupButton = document.getElementById('open-bookmark-cleanup');
-    if (bookmarkCleanupButton) {
-      this.initBookmarkManagementTab();
-    }
-    
     // 检查宽度设置相关元素
     if (this.widthSlider && this.widthValue) {
       this.initBookmarkWidthSettings();
@@ -357,26 +346,6 @@ class SettingsManager {
     themeToggleBtn.innerHTML = isDark ? ICONS.dark_mode : ICONS.light_mode;
   }
 
-  initFloatingBallSettings() {
-    // 加载悬浮球设置
-    chrome.storage.sync.get(['enableFloatingBall'], (result) => {
-      this.enableFloatingBallCheckbox.checked = result.enableFloatingBall !== false;
-    });
-
-    // 监听悬浮球设置变化
-    this.enableFloatingBallCheckbox.addEventListener('change', () => {
-      const isEnabled = this.enableFloatingBallCheckbox.checked;
-      // 发送消息到 background script
-      chrome.runtime.sendMessage({
-        action: 'updateFloatingBallSetting',
-        enabled: isEnabled
-      }, () => {
-        // 保存设置到 storage
-        chrome.storage.sync.set({ enableFloatingBall: isEnabled });
-      });
-    });
-  }
-
   initLinkOpeningSettings() {
     // 检查元素是否存在
     if (!this.openInNewTabCheckbox) {
@@ -530,15 +499,6 @@ class SettingsManager {
         addFolders(tree[0].children);
       }
     });
-  }
-
-  initBookmarkManagementTab() {
-    const tabButton = document.querySelector('[data-tab="bookmark-management"]');
-    if (tabButton) {
-      tabButton.addEventListener('click', () => {
-        this.switchTab('bookmark-management');
-      });
-    }
   }
 
   initWheelSwitchingTab() {

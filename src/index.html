@@ -15,7 +15,6 @@
   <script type="module" src="script.js"></script>
   <script src="wallpaper.js" defer></script>
   <script type="module" src="icons.js"></script>
-  <script type="module" src="bookmark-cleanup.js"></script>
   <script type="module" src="feature-tips.js"></script>
   <script type="module" src="settings.js"></script>
   <script type="module" src="search-engine-dropdown.js"></script>
@@ -173,10 +172,8 @@
           <button class="settings-tab-button active" data-tab="appearance" data-i18n="appearanceTab">外观设置</button>
           <button class="settings-tab-button" data-tab="layout" data-i18n="layoutTab">布局设置</button>
           <button class="settings-tab-button" data-tab="search" data-i18n="searchTab">搜索设置</button>
-          <button class="settings-tab-button" data-tab="floating-ball" data-i18n="floatingBallTab">悬浮球设置</button>
           <button class="settings-tab-button" data-tab="pinned-expand" data-i18n="pinnedExpandTab">固定展开</button>
           <button class="settings-tab-button" data-tab="link-opening" data-i18n="linkOpeningTab">链接打开方式</button>
-          <button class="settings-tab-button" data-tab="bookmark-management" data-i18n="bookmarkManagementTab">书签管理</button>
           <button class="settings-tab-button" data-tab="wheel-switching" data-i18n="wheelSwitchingTab">滚轮切换</button>
           <button class="settings-tab-button" data-tab="shortcuts" data-i18n="shortcutsTab">快捷键</button>
         </div>
@@ -382,17 +379,6 @@
               </div>
             </div>
           </div>
-          <div id="floating-ball-settings" class="settings-tab-content">
-             <h3 class="settings-modal-subtitle" data-i18n="floatingBallSettingsTitle">悬浮球设置</h3>
-             <p data-i18n="floatingBallDescription">开启悬浮球后会在页面右上角显示一个可点击的悬浮图标，用于快速访问搜索引擎和书签。</p>
-             <div class="setting-option">
-               <label for="enable-floating-ball" class="switch-label" data-i18n="enableFloatingBall">启悬浮球</label>
-               <label class="switch">
-                 <input type="checkbox" id="enable-floating-ball">
-                 <span class="slider round"></span>
-               </label>
-             </div>
-           </div>
           <!-- 固定展开设置面板 -->
           <div id="pinned-expand-settings" class="settings-tab-content">
             <h3 class="settings-modal-subtitle" data-i18n="pinnedExpandTitle">固定展开</h3>
@@ -448,17 +434,6 @@
               </label>
             </div>
           </div>
-           <div id="bookmark-management-settings" class="settings-tab-content">
-             <h3 class="settings-modal-subtitle" data-i18n="bookmarkCleanupSettingsTitle">书签清理与统计</h3>
-             <p data-i18n="bookmarkCleanupSettingsDescription">清理重复和失效的书签，查看书签使用统计数据，帮助您更好地管理书签。</p>
-             
-             <div class="bookmark-cleanup-actions">
-               <button id="open-bookmark-cleanup" class="primary-button">
-                 <span class="material-icons">cleaning_services</span>
-                 <span data-i18n="openBookmarkCleanup">打开书签清理工具</span>
-               </button>
-             </div>
-           </div>
            <div id="wheel-switching-settings" class="settings-tab-content">
              <h3 class="settings-modal-subtitle" data-i18n="wheelSwitchingSettingsTitle">滚轮切换</h3>
              <p data-i18n="wheelSwitchingDescription">设置滚轮切换功能</p>

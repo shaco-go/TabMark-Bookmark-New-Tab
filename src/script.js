@@ -1323,6 +1323,13 @@ async function initPinnedFolders() {
     return;
   }
 
+  // 检查固定展开功能是否启用，如果启用则不运行固定主页功能
+  const expandData = await chrome.storage.sync.get(['pinnedExpandEnabled']);
+  if (expandData.pinnedExpandEnabled) {
+    console.log('Pinned expand is enabled, skipping initPinnedFolders');
+    return;
+  }
+
   // 获取默认文件夹列表
   const data = await chrome.storage.sync.get(['defaultFolders', 'lastViewedFolder']);
   let defaultFolders = data.defaultFolders?.items || [];

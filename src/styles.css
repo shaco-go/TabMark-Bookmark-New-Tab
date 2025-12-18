@@ -2127,11 +2127,6 @@ body .default-folders-tabs.sidebar-expanded {
   align-items: center;
   min-width: 80px;
   cursor: pointer;
-  transition: transform 0.2s;
-}
-
-.pinned-folder-item-container:hover {
-  transform: scale(1.05);
 }
 
 /* 圆形图标容器 */
@@ -2139,12 +2134,12 @@ body .default-folders-tabs.sidebar-expanded {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 60px;
-  height: 60px;
-  background-color: white;
+  width: 50px;
+  height: 50px;
+  background-color: #3A3A3A;
   border-radius: 50%;
   box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.06), 0 2px 4px -2px rgb(0 0 0 / 0.06);
-  transition: all 0.2s;
+  transition: background-color 0.2s;
   border: 3px solid transparent;
 }
 
@@ -2205,15 +2200,10 @@ body .default-folders-tabs.sidebar-expanded {
 /* 固定主页按钮样式 */
 .pinned-home-button {
   cursor: pointer;
-  transition: background-color 0.2s ease;
 }
 
 .pinned-home-button .pinned-folder-item {
-  background-color: #f3f4f6;
-}
-
-.pinned-home-button:hover .pinned-folder-item {
-  background-color: #e5e7eb;
+  background-color: #3A3A3A;
 }
 
 .pinned-home-button.active .pinned-folder-item {
@@ -2231,11 +2221,7 @@ body .default-folders-tabs.sidebar-expanded {
 
 /* 暗色模式 - 固定主页按钮 */
 [data-theme="dark"] .pinned-home-button .pinned-folder-item {
-  background-color: #2d3748;
-}
-
-[data-theme="dark"] .pinned-home-button:hover .pinned-folder-item {
-  background-color: #374151;
+  background-color: #3A3A3A;
 }
 
 [data-theme="dark"] .pinned-home-button.active .pinned-folder-item {
@@ -2247,8 +2233,8 @@ body .default-folders-tabs.sidebar-expanded {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
 }
 
 .folder-icon svg {
@@ -2258,8 +2244,8 @@ body .default-folders-tabs.sidebar-expanded {
 }
 
 .folder-icon img {
-  width: 32px;
-  height: 32px;
+  width: 24px;
+  height: 24px;
   border-radius: 4px;
   object-fit: cover;
 }
