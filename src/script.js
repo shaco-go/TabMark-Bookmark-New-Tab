@@ -1315,7 +1315,7 @@ async function waitForFirstCategory(attemptsLeft = 5) {
 }
 
 // 重写为 initPinnedFolders (固定文件夹圆形图标展示)
-async function initPinnedFolders() {
+async function initPinnedFolders(force = false) {
   const pinnedFoldersContainer = document.getElementById('pinned-folders');
 
   if (!pinnedFoldersContainer) {
@@ -1323,11 +1323,13 @@ async function initPinnedFolders() {
     return;
   }
 
-  // 检查固定展开功能是否启用，如果启用则不运行固定主页功能
-  const expandData = await chrome.storage.sync.get(['pinnedExpandEnabled']);
-  if (expandData.pinnedExpandEnabled) {
-    console.log('Pinned expand is enabled, skipping initPinnedFolders');
-    return;
+  // 检查固定展开功能是否启用（除非强制执行）
+  if (!force) {
+    const expandData = await chrome.storage.sync.get(['pinnedExpandEnabled']);
+    if (expandData.pinnedExpandEnabled) {
+      console.log('Pinned expand is enabled, skipping initPinnedFolders');
+      return; // 如果固定展开启用，由 pinned-expand.js 接管渲染
+    }
   }
 
   // 获取默认文件夹列表
@@ -1403,12 +1405,21 @@ async function initPinnedFolders() {
 
   // 控制显示
   const wrapper = pinnedFoldersContainer.parentElement;
+  console.log('[initPinnedFolders] 固定主页文件夹数量:', defaultFolders.length);
+  console.log('[initPinnedFolders] wrapper 元素:', wrapper);
   if (wrapper) {
-    wrapper.style.display = defaultFolders.length > 0 ? 'flex' : 'none';
+    const displayValue = defaultFolders.length > 0 ? 'flex' : 'none';
+    wrapper.style.display = displayValue;
+    console.log('[initPinnedFolders] wrapper 显示状态设置为:', displayValue);
+  } else {
+    console.error('[initPinnedFolders] wrapper 元素未找到');
   }
 
   return defaultFolders;
 }
+
+// 将 initPinnedFolders 暴露到全局作用域，供 pinned-expand.js 使用
+window.initPinnedFolders = initPinnedFolders;
 
 // 保持向后兼容
 const initDefaultFoldersTabs = initPinnedFolders;
@@ -1481,17 +1492,14 @@ function initWheelSwitching() {
         if (nextFolder) {
           await switchToFolder(nextFolder.id);
 
-          // 添加切换动画效果
+          // 添加切换动画效果（移除 scale 避免出现滚动条）
           const tabs = document.querySelectorAll('.pinned-folder-item-container');
           tabs.forEach(tab => {
             if (tab.dataset.folderId === nextFolder.id) {
               tab.classList.add('switching');
-              tab.style.transform = 'scale(1.2)';
               setTimeout(() => {
                 tab.classList.remove('switching');
               }, 1500);
-            } else {
-              tab.style.transform = 'scale(1)';
             }
           });
         }
@@ -1534,6 +1542,9 @@ function initWheelSwitching() {
   });
 }
 
+// 将 initWheelSwitching 暴露到全局作用域，供 pinned-expand.js 使用
+window.initWheelSwitching = initWheelSwitching;
+
 // 修改文件夹切换函数，确保同步更新所有状态
 async function switchToFolder(folderId) {
   try {
@@ -1572,6 +1583,9 @@ async function switchToFolder(folderId) {
     selectSidebarFolder('1');
   }
 }
+
+// 将 switchToFolder 暴露到全局作用域，供 pinned-expand.js 使用
+window.switchToFolder = switchToFolder;
 
 function updateBookmarksDisplay(parentId, movedItemId, newIndex) {
   return new Promise((resolve, reject) => {
@@ -2942,6 +2956,7 @@ function setupSortable() {
     console.error('Bookmarks list element not found');
   }
 
+  // categories-list 只存在于侧边栏页面，主页面中不存在是正常的
   const categoriesList = document.getElementById('categories-list');
   if (categoriesList) {
     new Sortable(categoriesList, {
@@ -3004,8 +3019,6 @@ function setupSortable() {
         }
       });
     });
-  } else {
-    console.error('Categories list element not found');
   }
 }
 
@@ -3552,6 +3565,11 @@ function setupSpecialLinks() {
           break;
         case '#extensions':
           chromeUrl = 'chrome://extensions';
+          break;
+        case '#bookmarks':
+          // 检测是否为 Edge 浏览器
+          const isEdge = navigator.userAgent.includes('Edg');
+          chromeUrl = isEdge ? 'edge://favorites/' : 'chrome://bookmarks/';
           break;
         case '#settings':
           openSettingsModal();
@@ -6297,13 +6315,23 @@ function initScrollIndicator() {
 document.addEventListener('DOMContentLoaded', function() {
   // 初始化虚拟滚动
   initVirtualScroll();
-  
+
   // 初始化滚动指示器
   initScrollIndicator();
-  
+
   // 其他初始化代码...
   startPeriodicSync();
 });
 
-
-
+// 监听存储变化，同步更新固定主页和固定展开
+chrome.storage.onChanged.addListener((changes, namespace) => {
+  if (namespace === 'sync' && changes.defaultFolders) {
+    // 如果固定展开启用，通知其重新渲染
+    if (window.pinnedExpandManager && window.pinnedExpandManager.enabled) {
+      window.pinnedExpandManager.renderPinnedExpand();
+    } else {
+      // 否则重新初始化固定主页
+      initPinnedFolders();
+    }
+  }
+});

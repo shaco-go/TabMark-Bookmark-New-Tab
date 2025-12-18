@@ -811,7 +811,6 @@
     "presetWallpaperTitle": {
         "message": "프리셋 배경화면",
         "description": "프리셋 배경화면 설정 제목"
-    }
     },
     "pinnedExpandTitle": {
         "message": "고정 확장",

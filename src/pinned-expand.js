@@ -34,30 +34,75 @@ class PinnedExpandManager {
     });
   }
 
+  // 获取固定主页文件夹列表
+  async getDefaultFolders() {
+    return new Promise((resolve) => {
+      chrome.storage.sync.get('defaultFolders', (result) => {
+        const defaultFolders = result.defaultFolders || { items: [] };
+        // 按 order 排序
+        if (defaultFolders.items) {
+          defaultFolders.items.sort((a, b) => a.order - b.order);
+        }
+        resolve(defaultFolders);
+      });
+    });
+  }
+
   // 渲染固定展开内容
   async renderPinnedExpand() {
+    // 1. 检查是否启用固定展开
     if (!this.enabled || !this.folderId) {
       this.container.style.display = 'none';
+      if (typeof window.initPinnedFolders === 'function') {
+        // 强制执行 initPinnedFolders，跳过 pinnedExpandEnabled 检查
+        await window.initPinnedFolders(true);
+      }
       return;
     }
 
     try {
-      const items = await this.getExpandItems(this.folderId);
-      const truncatedItems = this.truncateItems(items, this.count);
+      // 2. 获取固定主页文件夹列表
+      const defaultFoldersData = await this.getDefaultFolders();
+      const defaultFolders = defaultFoldersData.items || [];
 
-      // 清空容器
+      // 3. 获取固定展开的子项
+      const expandItems = await this.getExpandItems(this.folderId);
+
+      // 4. 计算数量分配（固定主页优先，但也要截断）
+      const foldersToShow = defaultFolders.slice(0, this.count);
+      const remainingSlots = Math.max(0, this.count - foldersToShow.length);
+      const expandItemsToShow = expandItems.slice(0, remainingSlots);
+
+      // 5. 清空容器
       this.pinnedFoldersContainer.innerHTML = '';
 
-      // 添加固定主页按钮作为第一个项目
-      this.addHomeButton();
-
-      // 渲染固定展开项目
-      truncatedItems.forEach((item) => {
-        const itemElement = this.createItemElement(item);
-        this.pinnedFoldersContainer.appendChild(itemElement);
+      // 6. 渲染固定主页文件夹
+      console.log('[PinnedExpand] 渲染固定主页文件夹:', foldersToShow.length, '个');
+      foldersToShow.forEach((folder) => {
+        const folderElement = this.createPinnedFolderElement(folder);
+        this.pinnedFoldersContainer.appendChild(folderElement);
+        console.log('[PinnedExpand] 已添加固定主页文件夹:', folder.name, 'ID:', folder.id);
       });
 
+      // 7. 渲染固定展开的子项
+      console.log('[PinnedExpand] 渲染固定展开子项:', expandItemsToShow.length, '个');
+      expandItemsToShow.forEach((item) => {
+        const itemElement = this.createItemElement(item);
+        this.pinnedFoldersContainer.appendChild(itemElement);
+        console.log('[PinnedExpand] 已添加固定展开子项:', item.title, '类型:', item.type);
+      });
+
+      // 8. 显示容器并激活当前文件夹
       this.container.style.display = 'flex';
+      console.log('[PinnedExpand] 容器已显示，总共', foldersToShow.length + expandItemsToShow.length, '个项目');
+      await this.activateCurrentFolder();
+
+      // 9. 重新初始化滚轮切换功能
+      if (typeof window.initWheelSwitching === 'function') {
+        window.initWheelSwitching();
+        console.log('[PinnedExpand] 滚轮切换功能已初始化');
+      }
+
     } catch (error) {
       console.error('Error rendering pinned expand:', error);
       this.container.style.display = 'none';
@@ -95,22 +140,105 @@ class PinnedExpandManager {
 
   // 处理主页按钮点击
   handleHomeClick() {
-    // 获取默认书签文件夹并切换
-    chrome.storage.local.get(['defaultBookmarkId'], (result) => {
-      const defaultId = result.defaultBookmarkId;
-      if (defaultId && typeof window.switchToFolder === 'function') {
-        window.switchToFolder(defaultId);
-      } else {
-        // 如果没有设置默认文件夹，切换到书签栏
-        chrome.bookmarks.getTree((tree) => {
-          const bookmarksBar = tree[0].children.find(
-            (node) => node.id === '1'
-          );
-          if (bookmarksBar && typeof window.switchToFolder === 'function') {
-            window.switchToFolder(bookmarksBar.id);
-          }
-        });
+    // 首先尝试从默认文件夹配置中获取第一个文件夹
+    chrome.storage.sync.get('defaultFolders', (syncResult) => {
+      const defaultFolders = syncResult.defaultFolders?.items || [];
+
+      if (defaultFolders.length > 0) {
+        // 如果有默认文件夹配置，切换到第一个默认文件夹
+        const firstDefaultFolder = defaultFolders[0];
+        if (typeof window.switchToFolder === 'function') {
+          window.switchToFolder(firstDefaultFolder.id);
+          return;
+        }
       }
+
+      // 如果没有默认文件夹配置，尝试从 localStorage 获取
+      const defaultBookmarkId = localStorage.getItem('defaultBookmarkId');
+      if (defaultBookmarkId && typeof window.switchToFolder === 'function') {
+        window.switchToFolder(defaultBookmarkId);
+        return;
+      }
+
+      // 如果都没有，切换到书签栏（ID 为 '1'）
+      if (typeof window.switchToFolder === 'function') {
+        window.switchToFolder('1');
+      } else {
+        console.error('switchToFolder function not found');
+      }
+    });
+  }
+
+  // 创建固定主页文件夹元素
+  createPinnedFolderElement(folder) {
+    const itemContainer = document.createElement('div');
+    itemContainer.className = 'pinned-folder-item-container';
+    itemContainer.dataset.folderId = folder.id;
+    itemContainer.dataset.itemType = 'pinned-folder';
+    itemContainer.dataset.order = folder.order;
+
+    const itemElement = document.createElement('div');
+    itemElement.className = 'pinned-folder-item';
+
+    const icon = document.createElement('div');
+    icon.className = 'folder-icon';
+    icon.innerHTML = ICONS.folder;
+
+    itemElement.appendChild(icon);
+
+    const nameSpan = document.createElement('span');
+    nameSpan.textContent = folder.name;
+
+    itemContainer.appendChild(itemElement);
+    itemContainer.appendChild(nameSpan);
+
+    // 点击事件：切换到该文件夹
+    itemContainer.addEventListener('click', () => {
+      this.handlePinnedFolderClick(folder);
+    });
+
+    return itemContainer;
+  }
+
+  // 处理固定主页文件夹点击
+  async handlePinnedFolderClick(folder) {
+    console.log('Fixed folder clicked:', folder.name, folder.id);
+    if (typeof window.switchToFolder === 'function') {
+      await window.switchToFolder(folder.id);
+    } else {
+      console.error('switchToFolder function not found');
+    }
+  }
+
+  // 激活当前查看的文件夹
+  async activateCurrentFolder() {
+    return new Promise((resolve) => {
+      // 从 sync 获取 defaultFolders，从 local 获取 lastViewedFolder（与 switchToFolder 保持一致）
+      chrome.storage.sync.get(['defaultFolders'], (syncData) => {
+        chrome.storage.local.get(['lastViewedFolder'], (localData) => {
+          const defaultFolders = syncData.defaultFolders?.items || [];
+          const lastViewedFolder = localData.lastViewedFolder;
+
+          let folderToActivate;
+
+          if (lastViewedFolder && defaultFolders.some(f => f.id === lastViewedFolder)) {
+            folderToActivate = lastViewedFolder;
+          } else if (defaultFolders.length > 0) {
+            folderToActivate = defaultFolders[0].id;
+          }
+
+          if (folderToActivate) {
+            const activeItem = this.pinnedFoldersContainer.querySelector(
+              `.pinned-folder-item-container[data-folder-id="${folderToActivate}"]`
+            );
+            if (activeItem) {
+              activeItem.classList.add('active');
+            }
+          }
+
+          resolve();
+        });
+      });
     });
   }
 
@@ -192,6 +320,7 @@ class PinnedExpandManager {
 
   // 处理书签点击
   handleBookmarkClick(bookmark) {
+    console.log('Bookmark clicked:', bookmark.title, bookmark.url);
     chrome.storage.sync.get(['openInNewTab'], (result) => {
       const openInNewTab = result.openInNewTab !== false;
 
@@ -205,6 +334,7 @@ class PinnedExpandManager {
 
   // 处理文件夹点击
   handleFolderClick(folder) {
+    console.log('Expand folder clicked:', folder.title, folder.id);
     // 切换下方书签栏显示该文件夹内容
     if (typeof window.switchToFolder === 'function') {
       window.switchToFolder(folder.id);

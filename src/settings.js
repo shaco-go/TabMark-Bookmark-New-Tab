@@ -262,10 +262,12 @@ class SettingsManager {
   }
 
   loadSavedSettings() {
-    // 加载悬浮球设置
-    chrome.storage.sync.get(['enableFloatingBall'], (result) => {
-      this.enableFloatingBallCheckbox.checked = result.enableFloatingBall !== false;
-    });
+    // 加载悬浮球设置（只在侧边栏页面存在）
+    if (this.enableFloatingBallCheckbox) {
+      chrome.storage.sync.get(['enableFloatingBall'], (result) => {
+        this.enableFloatingBallCheckbox.checked = result.enableFloatingBall !== false;
+      });
+    }
 
     // 加载背景设置
     const savedBg = localStorage.getItem('selectedBackground');

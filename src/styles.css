@@ -2136,7 +2136,7 @@ body .default-folders-tabs.sidebar-expanded {
   justify-content: center;
   width: 50px;
   height: 50px;
-  background-color: #3A3A3A;
+  background-color: #F3F4F6;
   border-radius: 50%;
   box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.06), 0 2px 4px -2px rgb(0 0 0 / 0.06);
   transition: background-color 0.2s;
@@ -2147,20 +2147,24 @@ body .default-folders-tabs.sidebar-expanded {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
-/* 激活状态 */
+/* 激活状态 - 优化后的样式 */
 .pinned-folder-item-container.active .pinned-folder-item {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(16, 185, 129, 0.12) 100%);
   border-color: #10b981;
-  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.25), 0 0 0 1px rgba(16, 185, 129, 0.3);
+  transform: translateY(-2px);
 }
 
 /* 文件夹图标 */
 .pinned-folder-item .material-icons {
   font-size: 28px;
   color: #717882;
+  transition: all 0.3s ease;
 }
 
 .pinned-folder-item-container.active .material-icons {
   color: #10b981;
+  transform: scale(1.05);
 }
 
 /* 文件夹名称 */
@@ -2173,6 +2177,7 @@ body .default-folders-tabs.sidebar-expanded {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  transition: all 0.3s ease;
 }
 
 .pinned-folder-item-container.active > span {
@@ -2182,7 +2187,7 @@ body .default-folders-tabs.sidebar-expanded {
 
 /* 暗色模式 */
 [data-theme="dark"] .pinned-folder-item {
-  background-color: #2d3748;
+  background-color: #404040;
 }
 
 [data-theme="dark"] .pinned-folder-item .material-icons {

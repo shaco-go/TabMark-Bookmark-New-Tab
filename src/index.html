@@ -544,19 +544,5 @@
       </div>
     </div>
   </div>
-  <script>
-  // 书签管理链接点击事件处理
-  document.addEventListener('DOMContentLoaded', () => {
-    const bookmarksLink = document.getElementById('bookmarks-link');
-    if (bookmarksLink) {
-      bookmarksLink.addEventListener('click', (e) => {
-        e.preventDefault();
-        const isEdge = navigator.userAgent.includes('Edg');
-        const url = isEdge ? 'edge://favorites/' : 'chrome://bookmarks/';
-        chrome.tabs.create({ url });
-      });
-    }
-  });
-  </script>
 </body>
 </html>
