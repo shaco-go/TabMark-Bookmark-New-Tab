@@ -730,14 +730,6 @@ document.addEventListener('DOMContentLoaded', function() {
     attributeFilter: ['class']
   });
 
-  // 初始化快捷链接显示状态
-  chrome.storage.sync.get(['enableQuickLinks'], function(result) {
-    const quickLinksWrapper = document.querySelector('.quick-links-wrapper');
-    if (quickLinksWrapper) {
-      quickLinksWrapper.style.display = result.enableQuickLinks !== false ? 'flex' : 'none';
-    }
-  });
-
   // 检测是否在 Side Panel 中运行
   const isSidePanel = window.location.search.includes('context=side_panel') || 
                      window.location.hash.includes('context=side_panel');
@@ -1351,9 +1343,9 @@ async function initPinnedFolders() {
     const item = document.createElement('div');
     item.className = 'pinned-folder-item';
 
-    const icon = document.createElement('span');
-    icon.className = 'material-icons';
-    icon.textContent = 'folder';
+    const icon = document.createElement('div');
+    icon.className = 'folder-icon';
+    icon.innerHTML = ICONS.folder;
 
     item.appendChild(icon);
 
@@ -5940,23 +5932,6 @@ document.addEventListener('DOMContentLoaded', function() {
       event.stopPropagation();
     });
   }
-
-  // 添加一个全局函数用于更新快捷链接显示状态
-  function updateQuickLinksVisibility() {
-    chrome.storage.sync.get(['enableQuickLinks'], function(result) {
-      const quickLinksWrapper = document.querySelector('.quick-links-wrapper');
-      if (quickLinksWrapper) {
-        quickLinksWrapper.style.display = result.enableQuickLinks !== false ? 'flex' : 'none';
-      }
-    });
-  }
-
-  // 监听存储变化
-  chrome.storage.onChanged.addListener(function(changes, namespace) {
-    if (namespace === 'sync' && changes.enableQuickLinks) {
-      updateQuickLinksVisibility();
-    }
-  });
 
   // 添加搜索引擎变更事件监听
   document.addEventListener('defaultSearchEngineChanged', (event) => {

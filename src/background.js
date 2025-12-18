@@ -1,14 +1,36 @@
 // 当扩展安装或更新时触发
 chrome.runtime.onInstalled.addListener((details) => {
   console.log("Extension installed or updated:", details.reason);
-  
+
   if (details.reason === chrome.runtime.OnInstalledReason.INSTALL) {
     chrome.tabs.create({ url: "chrome://newtab" });
     chrome.storage.local.set({ defaultBookmarkId: null });
-    chrome.storage.sync.set({ 
+    chrome.storage.sync.set({
       openInNewTab: true, // 默认在新标签页打开
       sidepanelOpenInNewTab: true, // 默认在新标签页打开
       sidepanelOpenInSidepanel: false // 默认不在侧边栏内打开
+    });
+  }
+
+  // 如果是更新，清理快捷链接相关的旧数据
+  if (details.reason === chrome.runtime.OnInstalledReason.UPDATE) {
+    console.log("Cleaning up quick links data after update");
+
+    // 清理 chrome.storage.sync 中的快捷链接数据
+    chrome.storage.sync.remove([
+      'enableQuickLinks',
+      'fixedShortcuts',
+      'blacklist'
+    ], () => {
+      console.log("Quick links data cleaned from sync storage");
+    });
+
+    // 设置新功能的默认值
+    chrome.storage.sync.set({
+      pinnedExpandEnabled: false,    // 默认关闭固定展开
+      pinnedExpandCount: 10          // 默认显示10个
+    }, () => {
+      console.log("Pinned expand defaults set");
     });
   }
 

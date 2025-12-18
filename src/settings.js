@@ -13,7 +13,6 @@ class SettingsManager {
     this.tabContents = document.querySelectorAll('.settings-tab-content');
     this.bgOptions = document.querySelectorAll('.settings-bg-option');
     this.enableFloatingBallCheckbox = document.getElementById('enable-floating-ball');
-    this.enableQuickLinksCheckbox = document.getElementById('enable-quick-links');
     this.openInNewTabCheckbox = document.getElementById('open-in-new-tab');
     
     // 侧边栏模式下的链接打开方式设置元素可能不存在于所有页面
@@ -40,12 +39,8 @@ class SettingsManager {
     this.loadSavedSettings();
     this.initEventListeners();
     this.initTheme();
-    
+
     // 只在相关元素存在时才调用各个初始化方法
-    if (this.enableQuickLinksCheckbox) {
-      this.initQuickLinksSettings();
-    }
-    
     if (this.enableFloatingBallCheckbox) {
       this.initFloatingBallSettings();
     }
@@ -348,29 +343,6 @@ class SettingsManager {
     if (!themeToggleBtn) return;
     
     themeToggleBtn.innerHTML = isDark ? ICONS.dark_mode : ICONS.light_mode;
-  }
-
-  initQuickLinksSettings() {
-    // 加载快捷链接设置
-    chrome.storage.sync.get(['enableQuickLinks'], (result) => {
-      this.enableQuickLinksCheckbox.checked = result.enableQuickLinks !== false;
-      this.toggleQuickLinksVisibility(this.enableQuickLinksCheckbox.checked);
-    });
-
-    // 监听快捷链接设置变化
-    this.enableQuickLinksCheckbox.addEventListener('change', () => {
-      const isEnabled = this.enableQuickLinksCheckbox.checked;
-      chrome.storage.sync.set({ enableQuickLinks: isEnabled }, () => {
-        this.toggleQuickLinksVisibility(isEnabled);
-      });
-    });
-  }
-
-  toggleQuickLinksVisibility(show) {
-    const quickLinksWrapper = document.querySelector('.quick-links-wrapper');
-    if (quickLinksWrapper) {
-      quickLinksWrapper.style.display = show ? 'flex' : 'none';
-    }
   }
 
   initFloatingBallSettings() {
