@@ -859,5 +859,37 @@
     "presetWallpaperTitle": {
         "message": "預設桌布",
         "description": "預設桌布設定標題"
+    },
+    "pinnedExpandTitle": {
+        "message": "固定展開",
+        "description": "固定展開功能標題"
+    },
+    "pinnedExpandTab": {
+        "message": "固定展開",
+        "description": "固定展開設定標籤"
+    },
+    "pinnedExpandDescription": {
+        "message": "選擇一個書籤資料夾，將其子項平鋪展示在搜尋框下方，方便快速存取。",
+        "description": "固定展開功能說明"
+    },
+    "enablePinnedExpand": {
+        "message": "啟用固定展開",
+        "description": "固定展開開關標籤"
+    },
+    "selectExpandFolder": {
+        "message": "選擇展開資料夾",
+        "description": "資料夾選擇下拉框標籤"
+    },
+    "expandItemCount": {
+        "message": "顯示數量",
+        "description": "顯示數量滑桿標籤"
+    },
+    "expandItemCountDescription": {
+        "message": "最多顯示 $1 個項目",
+        "description": "顯示數量說明"
+    },
+    "homeFolderButton": {
+        "message": "主頁",
+        "description": "固定主頁按鈕文字"
     }
 }

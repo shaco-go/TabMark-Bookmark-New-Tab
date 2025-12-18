@@ -27,6 +27,7 @@ let pendingWrite = null;
 const STORAGE_WRITE_INTERVAL = 1000; // 1秒的节流间隔
 // 在文件顶部添加导入语句
 import { ICONS } from './icons.js';
+import { initPinnedExpand } from './pinned-expand.js';
 
 // 解决函数未定义错误，将这些函数提升到全局范围
 // 创建二维码函数
@@ -235,6 +236,8 @@ document.addEventListener('DOMContentLoaded', function () {
   initGestureNavigation(updateBookmarksDisplay);
    // 初始化功能提示
   featureTips.initAllTips();
+  // 初始化固定展开功能
+  initPinnedExpand();
   // 替换所有图标
   replaceIconsWithSvg();
 

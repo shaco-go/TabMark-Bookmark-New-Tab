@@ -812,4 +812,37 @@
         "message": "프리셋 배경화면",
         "description": "프리셋 배경화면 설정 제목"
     }
+    },
+    "pinnedExpandTitle": {
+        "message": "고정 확장",
+        "description": "고정 확장 기능 제목"
+    },
+    "pinnedExpandTab": {
+        "message": "고정 확장",
+        "description": "고정 확장 설정 탭"
+    },
+    "pinnedExpandDescription": {
+        "message": "북마크 폴더를 선택하여 검색창 아래에 하위 항목을 평면적으로 표시하여 빠르게 액세스할 수 있습니다.",
+        "description": "고정 확장 기능 설명"
+    },
+    "enablePinnedExpand": {
+        "message": "고정 확장 활성화",
+        "description": "고정 확장 토글 레이블"
+    },
+    "selectExpandFolder": {
+        "message": "확장 폴더 선택",
+        "description": "폴더 선택 드롭다운 레이블"
+    },
+    "expandItemCount": {
+        "message": "표시 개수",
+        "description": "표시 개수 슬라이더 레이블"
+    },
+    "expandItemCountDescription": {
+        "message": "최대 $1개 항목 표시",
+        "description": "표시 개수 설명"
+    },
+    "homeFolderButton": {
+        "message": "홈",
+        "description": "홈 폴더 버튼 텍스트"
+    }
 }

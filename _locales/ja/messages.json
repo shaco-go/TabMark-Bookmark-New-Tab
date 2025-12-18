@@ -852,4 +852,37 @@
         "message": "プリセット壁紙",
         "description": "プリセット壁紙設定のタイトル"
     }
+    },
+    "pinnedExpandTitle": {
+        "message": "固定展開",
+        "description": "固定展開機能のタイトル"
+    },
+    "pinnedExpandTab": {
+        "message": "固定展開",
+        "description": "固定展開設定タブ"
+    },
+    "pinnedExpandDescription": {
+        "message": "ブックマークフォルダを選択して、その子項目を検索ボックスの下に平面的に表示し、素早くアクセスできます。",
+        "description": "固定展開機能の説明"
+    },
+    "enablePinnedExpand": {
+        "message": "固定展開を有効にする",
+        "description": "固定展開トグルラベル"
+    },
+    "selectExpandFolder": {
+        "message": "展開フォルダを選択",
+        "description": "フォルダ選択ドロップダウンラベル"
+    },
+    "expandItemCount": {
+        "message": "表示数",
+        "description": "表示数スライダーラベル"
+    },
+    "expandItemCountDescription": {
+        "message": "最大 $1 項目を表示",
+        "description": "表示数の説明"
+    },
+    "homeFolderButton": {
+        "message": "ホーム",
+        "description": "ホームフォルダボタンのテキスト"
+    }
 }

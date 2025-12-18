@@ -125,6 +125,7 @@
 
   <script src="Sortable.min.js"></script>
   <script src="qrcode.min.js"></script>
+  <script type="module" src="pinned-expand.js"></script>
   <script src="progress.js"></script>
   <div class="links-icons">
     <a href="#history" id="history-link" data-i18n-title="historyLinkTitle">
@@ -173,6 +174,7 @@
           <button class="settings-tab-button" data-tab="layout" data-i18n="layoutTab">布局设置</button>
           <button class="settings-tab-button" data-tab="search" data-i18n="searchTab">搜索设置</button>
           <button class="settings-tab-button" data-tab="floating-ball" data-i18n="floatingBallTab">悬浮球设置</button>
+          <button class="settings-tab-button" data-tab="pinned-expand" data-i18n="pinnedExpandTab">固定展开</button>
           <button class="settings-tab-button" data-tab="link-opening" data-i18n="linkOpeningTab">链接打开方式</button>
           <button class="settings-tab-button" data-tab="bookmark-management" data-i18n="bookmarkManagementTab">书签管理</button>
           <button class="settings-tab-button" data-tab="wheel-switching" data-i18n="wheelSwitchingTab">滚轮切换</button>
@@ -391,6 +393,31 @@
                </label>
              </div>
            </div>
+          <!-- 固定展开设置面板 -->
+          <div id="pinned-expand-settings" class="settings-tab-content">
+            <h3 class="settings-modal-subtitle" data-i18n="pinnedExpandTitle">固定展开</h3>
+            <p data-i18n="pinnedExpandDescription">选择一个书签文件夹，将其子项平铺展示在搜索框下方，方便快速访问。</p>
+            <div class="setting-option">
+              <label for="enable-pinned-expand" class="switch-label" data-i18n="enablePinnedExpand">启用固定展开</label>
+              <label class="switch">
+                <input type="checkbox" id="enable-pinned-expand">
+                <span class="slider round"></span>
+              </label>
+            </div>
+            <div class="setting-option">
+              <label for="pinned-expand-folder" class="switch-label" data-i18n="selectExpandFolder">选择展开文件夹</label>
+              <select id="pinned-expand-folder" class="folder-select">
+                <option value="">-- 请选择文件夹 --</option>
+              </select>
+            </div>
+            <div class="setting-option">
+              <label for="pinned-expand-count" class="switch-label" data-i18n="expandItemCount">显示数量</label>
+              <div class="slider-container">
+                <input type="range" id="pinned-expand-count" min="6" max="12" step="2" value="10" class="count-slider">
+                <span id="pinned-expand-count-value" class="count-value">10</span>
+              </div>
+            </div>
+          </div>
           <!-- 添加链接打开方式设置面板 -->
           <div id="link-opening-settings" class="settings-tab-content">
             <h3 class="settings-modal-subtitle" data-i18n="linkOpeningSettingsTitle">链接打开方式</h3>

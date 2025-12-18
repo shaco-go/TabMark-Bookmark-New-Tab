@@ -773,4 +773,37 @@
         "message": "Fondos predefinidos",
         "description": "Título para los fondos de pantalla predefinidos"
     }
+    },
+    "pinnedExpandTitle": {
+        "message": "Expansión Fija",
+        "description": "Título de la función de expansión fija"
+    },
+    "pinnedExpandTab": {
+        "message": "Expansión Fija",
+        "description": "Pestaña de configuración de expansión fija"
+    },
+    "pinnedExpandDescription": {
+        "message": "Seleccione una carpeta de marcadores para mostrar sus elementos secundarios en un diseño plano debajo del cuadro de búsqueda para un acceso rápido.",
+        "description": "Descripción de la función de expansión fija"
+    },
+    "enablePinnedExpand": {
+        "message": "Habilitar Expansión Fija",
+        "description": "Etiqueta de alternancia de expansión fija"
+    },
+    "selectExpandFolder": {
+        "message": "Seleccionar Carpeta de Expansión",
+        "description": "Etiqueta del menú desplegable de selección de carpeta"
+    },
+    "expandItemCount": {
+        "message": "Cantidad de Visualización",
+        "description": "Etiqueta del control deslizante de cantidad de visualización"
+    },
+    "expandItemCountDescription": {
+        "message": "Mostrar hasta $1 elementos",
+        "description": "Descripción de la cantidad de visualización"
+    },
+    "homeFolderButton": {
+        "message": "Inicio",
+        "description": "Texto del botón de carpeta de inicio"
+    }
 }

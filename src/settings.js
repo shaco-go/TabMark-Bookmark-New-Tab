@@ -32,6 +32,13 @@ class SettingsManager {
     this.showBookmarkSuggestionsCheckbox = document.getElementById('show-bookmark-suggestions');
     this.enableWheelSwitchingCheckbox = document.getElementById('enable-wheel-switching');
     this.openSearchInNewTabCheckbox = document.getElementById('open-search-in-new-tab');
+
+    // 固定展开相关元素
+    this.enablePinnedExpandCheckbox = document.getElementById('enable-pinned-expand');
+    this.pinnedExpandFolderSelect = document.getElementById('pinned-expand-folder');
+    this.pinnedExpandCountSlider = document.getElementById('pinned-expand-count');
+    this.pinnedExpandCountValue = document.getElementById('pinned-expand-count-value');
+
     this.init();
   }
 
@@ -48,7 +55,12 @@ class SettingsManager {
     if (this.openInNewTabCheckbox || this.sidepanelOpenInNewTabCheckbox || this.sidepanelOpenInSidepanelCheckbox) {
       this.initLinkOpeningSettings();
     }
-    
+
+    // 初始化固定展开设置
+    if (this.enablePinnedExpandCheckbox) {
+      this.initPinnedExpandSettings();
+    }
+
     // 检查书签管理相关元素
     const bookmarkCleanupButton = document.getElementById('open-bookmark-cleanup');
     if (bookmarkCleanupButton) {
@@ -426,6 +438,96 @@ class SettingsManager {
       if (isEnabled && this.sidepanelOpenInNewTabCheckbox.checked) {
         this.sidepanelOpenInNewTabCheckbox.checked = false;
         chrome.storage.sync.set({ sidepanelOpenInNewTab: false });
+      }
+    });
+  }
+
+  initPinnedExpandSettings() {
+    // 加载固定展开设置
+    chrome.storage.sync.get(
+      ['pinnedExpandEnabled', 'pinnedExpandFolderId', 'pinnedExpandCount'],
+      (result) => {
+        this.enablePinnedExpandCheckbox.checked = result.pinnedExpandEnabled || false;
+        this.pinnedExpandCountSlider.value = result.pinnedExpandCount || 10;
+        this.pinnedExpandCountValue.textContent = result.pinnedExpandCount || 10;
+
+        // 填充文件夹选择器
+        this.populateFolderSelect(result.pinnedExpandFolderId);
+      }
+    );
+
+    // 监听启用/禁用变化
+    this.enablePinnedExpandCheckbox.addEventListener('change', () => {
+      const isEnabled = this.enablePinnedExpandCheckbox.checked;
+      chrome.storage.sync.set({ pinnedExpandEnabled: isEnabled }, () => {
+        // 通知 pinned-expand.js 更新显示
+        if (window.pinnedExpandManager) {
+          window.pinnedExpandManager.updateSettings({ enabled: isEnabled });
+        }
+      });
+    });
+
+    // 监听文件夹选择变化
+    this.pinnedExpandFolderSelect.addEventListener('change', () => {
+      const folderId = this.pinnedExpandFolderSelect.value;
+      chrome.storage.sync.set({ pinnedExpandFolderId: folderId }, () => {
+        // 通知 pinned-expand.js 更新显示
+        if (window.pinnedExpandManager) {
+          window.pinnedExpandManager.updateSettings({ folderId: folderId });
+        }
+      });
+    });
+
+    // 监听数量滑块变化
+    this.pinnedExpandCountSlider.addEventListener('input', () => {
+      const count = parseInt(this.pinnedExpandCountSlider.value);
+      this.pinnedExpandCountValue.textContent = count;
+    });
+
+    this.pinnedExpandCountSlider.addEventListener('change', () => {
+      const count = parseInt(this.pinnedExpandCountSlider.value);
+      chrome.storage.sync.set({ pinnedExpandCount: count }, () => {
+        // 通知 pinned-expand.js 更新显示
+        if (window.pinnedExpandManager) {
+          window.pinnedExpandManager.updateSettings({ count: count });
+        }
+      });
+    });
+  }
+
+  // 填充文件夹选择器
+  populateFolderSelect(selectedFolderId) {
+    chrome.bookmarks.getTree((tree) => {
+      // 清空选择器
+      this.pinnedExpandFolderSelect.innerHTML = '<option value="">-- 请选择文件夹 --</option>';
+
+      // 递归遍历书签树，只添加文件夹
+      const addFolders = (nodes, level = 0) => {
+        nodes.forEach((node) => {
+          if (!node.url) {
+            // 这是一个文件夹
+            const option = document.createElement('option');
+            option.value = node.id;
+            option.textContent = '  '.repeat(level) + node.title;
+
+            // 如果是当前选中的文件夹，设置为选中状态
+            if (node.id === selectedFolderId) {
+              option.selected = true;
+            }
+
+            this.pinnedExpandFolderSelect.appendChild(option);
+
+            // 递归添加子文件夹
+            if (node.children) {
+              addFolders(node.children, level + 1);
+            }
+          }
+        });
+      };
+
+      // 从根节点开始遍历
+      if (tree[0] && tree[0].children) {
+        addFolders(tree[0].children);
       }
     });
   }

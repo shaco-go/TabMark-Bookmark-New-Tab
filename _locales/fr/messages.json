@@ -755,4 +755,37 @@
         "message": "Fonds d'écran prédéfinis",
         "description": "Titre pour les fonds d'écran prédéfinis"
     }
+    },
+    "pinnedExpandTitle": {
+        "message": "Expansion Épinglée",
+        "description": "Titre de la fonction d'expansion épinglée"
+    },
+    "pinnedExpandTab": {
+        "message": "Expansion Épinglée",
+        "description": "Onglet de paramètres d'expansion épinglée"
+    },
+    "pinnedExpandDescription": {
+        "message": "Sélectionnez un dossier de signets pour afficher ses éléments enfants dans une disposition plate sous la zone de recherche pour un accès rapide.",
+        "description": "Description de la fonction d'expansion épinglée"
+    },
+    "enablePinnedExpand": {
+        "message": "Activer l'Expansion Épinglée",
+        "description": "Étiquette de basculement d'expansion épinglée"
+    },
+    "selectExpandFolder": {
+        "message": "Sélectionner le Dossier d'Expansion",
+        "description": "Étiquette du menu déroulant de sélection de dossier"
+    },
+    "expandItemCount": {
+        "message": "Nombre d'Affichage",
+        "description": "Étiquette du curseur de nombre d'affichage"
+    },
+    "expandItemCountDescription": {
+        "message": "Afficher jusqu'à $1 éléments",
+        "description": "Description du nombre d'affichage"
+    },
+    "homeFolderButton": {
+        "message": "Accueil",
+        "description": "Texte du bouton de dossier d'accueil"
+    }
 }

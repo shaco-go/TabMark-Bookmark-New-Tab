@@ -937,5 +937,37 @@
     "bingWallpapersTitle": {
         "message": "必应壁纸",
         "description": "必应壁纸标题"
+    },
+    "pinnedExpandTitle": {
+        "message": "固定展开",
+        "description": "固定展开功能标题"
+    },
+    "pinnedExpandTab": {
+        "message": "固定展开",
+        "description": "固定展开设置标签"
+    },
+    "pinnedExpandDescription": {
+        "message": "选择一个书签文件夹，将其子项平铺展示在搜索框下方，方便快速访问。",
+        "description": "固定展开功能说明"
+    },
+    "enablePinnedExpand": {
+        "message": "启用固定展开",
+        "description": "固定展开开关标签"
+    },
+    "selectExpandFolder": {
+        "message": "选择展开文件夹",
+        "description": "文件夹选择下拉框标签"
+    },
+    "expandItemCount": {
+        "message": "显示数量",
+        "description": "显示数量滑块标签"
+    },
+    "expandItemCountDescription": {
+        "message": "最多显示 $1 个项目",
+        "description": "显示数量说明"
+    },
+    "homeFolderButton": {
+        "message": "主页",
+        "description": "固定主页按钮文本"
     }
 }

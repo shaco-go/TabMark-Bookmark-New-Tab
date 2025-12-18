@@ -878,5 +878,37 @@
     "presetWallpaperTitle": {
         "message": "Preset Wallpapers",
         "description": "Title for preset wallpaper settings"
+    },
+    "pinnedExpandTitle": {
+        "message": "Pinned Expand",
+        "description": "Pinned expand feature title"
+    },
+    "pinnedExpandTab": {
+        "message": "Pinned Expand",
+        "description": "Pinned expand settings tab"
+    },
+    "pinnedExpandDescription": {
+        "message": "Select a bookmark folder to display its children in a flat layout below the search box for quick access.",
+        "description": "Pinned expand feature description"
+    },
+    "enablePinnedExpand": {
+        "message": "Enable Pinned Expand",
+        "description": "Pinned expand toggle label"
+    },
+    "selectExpandFolder": {
+        "message": "Select Expand Folder",
+        "description": "Folder selection dropdown label"
+    },
+    "expandItemCount": {
+        "message": "Display Count",
+        "description": "Display count slider label"
+    },
+    "expandItemCountDescription": {
+        "message": "Show up to $1 items",
+        "description": "Display count description"
+    },
+    "homeFolderButton": {
+        "message": "Home",
+        "description": "Home folder button text"
     }
 }

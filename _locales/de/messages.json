@@ -801,4 +801,37 @@
         "message": "Voreingestellte Hintergrundbilder",
         "description": "Titel für voreingestellte Hintergrundbilder"
     }
+    },
+    "pinnedExpandTitle": {
+        "message": "Angeheftete Erweiterung",
+        "description": "Titel der angehefteten Erweiterungsfunktion"
+    },
+    "pinnedExpandTab": {
+        "message": "Angeheftete Erweiterung",
+        "description": "Registerkarte für angeheftete Erweiterungseinstellungen"
+    },
+    "pinnedExpandDescription": {
+        "message": "Wählen Sie einen Lesezeichenordner aus, um seine untergeordneten Elemente in einem flachen Layout unter dem Suchfeld für schnellen Zugriff anzuzeigen.",
+        "description": "Beschreibung der angehefteten Erweiterungsfunktion"
+    },
+    "enablePinnedExpand": {
+        "message": "Angeheftete Erweiterung Aktivieren",
+        "description": "Umschaltbeschriftung für angeheftete Erweiterung"
+    },
+    "selectExpandFolder": {
+        "message": "Erweiterungsordner Auswählen",
+        "description": "Beschriftung des Dropdown-Menüs zur Ordnerauswahl"
+    },
+    "expandItemCount": {
+        "message": "Anzeigeanzahl",
+        "description": "Beschriftung des Schiebereglers für die Anzeigeanzahl"
+    },
+    "expandItemCountDescription": {
+        "message": "Bis zu $1 Elemente anzeigen",
+        "description": "Beschreibung der Anzeigeanzahl"
+    },
+    "homeFolderButton": {
+        "message": "Startseite",
+        "description": "Text der Startordner-Schaltfläche"
+    }
 }
