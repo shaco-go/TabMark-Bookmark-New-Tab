@@ -37,7 +37,7 @@
     },
     "confirmDeleteMessage": {
         "message": "¿Estás seguro de que deseas eliminar \"$1\"?",
-        "description": "Mensaje para confirmar la eliminación de un elemento"
+        "description": "Mensaje de confirmación para eliminar un elemento"
     },
     "confirmDeleteButton": {
         "message": "Eliminar",
@@ -102,10 +102,6 @@
     "folderDeleted": {
         "message": "Carpeta eliminada: ID=$1, Título=$2",
         "description": "Mensaje de registro cuando se elimina una carpeta"
-    },
-    "confirmDeleteMessage": {
-        "message": "¿Estás seguro de que deseas eliminar \"$1\"?",
-        "description": "Mensaje de confirmación para eliminar un elemento"
     },
     "morningGreeting": {
         "message": "Buenos días👋",
@@ -210,6 +206,10 @@
     "extensionsLinkTitle": {
         "message": "Extensiones",
         "description": "Título del enlace de extensiones"
+    },
+    "bookmarksLinkTitle": {
+        "message": "Gestor de Marcadores",
+        "description": "Título del enlace del gestor de marcadores"
     },
     "settingsLinkTitle": {
         "message": "Configuraciones",
@@ -608,6 +608,10 @@
     "showExtensionsLink": {
         "message": "Mostrar Extensiones",
         "description": "Opción para mostrar enlace de extensiones"
+    },
+    "showBookmarksLink": {
+        "message": "Mostrar Gestor de Marcadores",
+        "description": "Opción para mostrar el enlace del gestor de marcadores"
     },
     "searchTab": {
         "message": "Búsqueda",

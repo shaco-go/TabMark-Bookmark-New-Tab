@@ -73,23 +73,27 @@
     },
     "extensionsLinkTitle": {
         "message": "擴充功能",
-        "description": "擴充功能連結的標題"
+        "description": "擴充功能連結標題"
+    },
+    "bookmarksLinkTitle": {
+        "message": "書籤管理",
+        "description": "書籤管理連結標題"
     },
     "settingsLinkTitle": {
         "message": "設定",
-        "description": "設定連結的標題"
+        "description": "設定連結標題"
     },
     "settingsTitle": {
         "message": "設定",
-        "description": "設定模態框的標題"
+        "description": "設定標題"
     },
     "appearanceTab": {
         "message": "外觀",
-        "description": "外觀設定標籤名"
+        "description": "外觀設定標籤"
     },
     "floatingBallTab": {
-        "message": "懸浮球設定",
-        "description": "懸浮球設定標籤名"
+        "message": "懸浮球",
+        "description": "懸浮球設定標籤"
     },
     "languageTab": {
         "message": "語言",
@@ -108,8 +112,8 @@
         "description": "懸浮球功能描述"
     },
     "enableFloatingBall": {
-        "message": "開啟懸浮球",
-        "description": "開啟懸浮球的標籤"
+        "message": "啟用懸浮球",
+        "description": "啟用懸浮球選項"
     },
     "languageSettingsTitle": {
         "message": "語言 / Language",
@@ -215,34 +219,6 @@
         "message": "更多搜尋支援即將推出",
         "description": "更多搜尋支援提示"
     },
-    "settingsTitle": {
-        "message": "設定",
-        "description": "設定標題"
-    },
-    "appearanceTab": {
-        "message": "外觀",
-        "description": "外觀設定標籤"
-    },
-    "floatingBallTab": {
-        "message": "懸浮球",
-        "description": "懸浮球設定標籤"
-    },
-    "backgroundColorTitle": {
-        "message": "背景顏色",
-        "description": "背景顏色設定標題"
-    },
-    "floatingBallSettingsTitle": {
-        "message": "懸浮球設定",
-        "description": "懸浮球設定標題"
-    },
-    "floatingBallDescription": {
-        "message": "開啟懸浮球後會在頁面右上角顯示一個可點擊的懸浮圖示，用於快速訪問搜尋引擎和書籤。",
-        "description": "懸浮球功能描述"
-    },
-    "enableFloatingBall": {
-        "message": "啟用懸浮球",
-        "description": "啟用懸浮球選項"
-    },
     "historyLinkTitle": {
         "message": "歷史記錄",
         "description": "歷史記錄連結標題"
@@ -254,14 +230,6 @@
     "passwordsLinkTitle": {
         "message": "密碼",
         "description": "密碼連結標題"
-    },
-    "extensionsLinkTitle": {
-        "message": "擴充功能",
-        "description": "擴充功能連結標題"
-    },
-    "settingsLinkTitle": {
-        "message": "設定",
-        "description": "設定連結標題"
     },
     "confirmDeleteQuickLinkMessage": {
         "message": "您確定要刪除快捷連結 \"$1\" 嗎？該連結將不會出現在快速連結列表中。",
@@ -643,7 +611,7 @@
         "message": "自訂書籤和界面的佈局顯示",
         "description": "佈局設定描述"
     },
-    "bookmarkWidthTitle": {     
+    "bookmarkWidthTitle": {
         "message": "書籤寬度設定",
         "description": "書籤寬度設定標題"
     },
@@ -689,7 +657,7 @@
         "message": "深色",
         "description": "深色主題選項"
     },
-    "autoTheme": {  
+    "autoTheme": {
         "message": "跟隨系統",
         "description": "跟隨系統主題選項"
     },
@@ -710,7 +678,7 @@
         "description": "顯示頁尾選項"
     },
     "quickAccessLinksTitle": {
-        "message": "快速訪問連結",      
+        "message": "快速訪問連結",
         "description": "快速訪問連結設定標題"
     },
     "showHistoryLink": {
@@ -728,6 +696,10 @@
     "showExtensionsLink": {
         "message": "顯示擴充程式連結",
         "description": "顯示擴充程式連結選項"
+    },
+    "showBookmarksLink": {
+        "message": "顯示書籤管理",
+        "description": "顯示書籤管理選項"
     },
     "searchTab": {
         "message": "搜尋設定",
@@ -806,8 +778,8 @@
         "description": "Grok 搜索引擎標籤"
     },
     "searchBoxDisplayTitle": {
-            "message": "搜尋框顯示",
-            "description": "搜尋框顯示設定標題"
+        "message": "搜尋框顯示",
+        "description": "搜尋框顯示設定標題"
     },
     "shortcutsTab": {
         "message": "快速鍵",

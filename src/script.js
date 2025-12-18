@@ -1319,13 +1319,12 @@ async function waitForFirstCategory(attemptsLeft = 5) {
   }
 }
 
-// 修改 initDefaultFoldersTabs 函数
-async function initDefaultFoldersTabs() {
-  const tabsContainer = document.querySelector('.tabs-container');
-  const defaultFoldersTabs = document.querySelector('.default-folders-tabs');
-  
-  if (!tabsContainer || !defaultFoldersTabs) {
-    console.error('Tabs container not found');
+// 重写为 initPinnedFolders (固定文件夹圆形图标展示)
+async function initPinnedFolders() {
+  const pinnedFoldersContainer = document.getElementById('pinned-folders');
+
+  if (!pinnedFoldersContainer) {
+    console.error('Pinned folders container not found');
     return;
   }
 
@@ -1333,66 +1332,85 @@ async function initDefaultFoldersTabs() {
   const data = await chrome.storage.sync.get(['defaultFolders', 'lastViewedFolder']);
   let defaultFolders = data.defaultFolders?.items || [];
   const lastViewedFolder = data.lastViewedFolder;
-  
+
   // 确保文件夹按 order 排序
   defaultFolders = defaultFolders.sort((a, b) => a.order - b.order);
-  
-  console.log('Initializing default folders tabs:', defaultFolders);
 
-  // 清空现有标签
-  tabsContainer.innerHTML = '';
+  console.log('Initializing pinned folders:', defaultFolders);
 
-  // 创建标签
+  // 清空容器
+  pinnedFoldersContainer.innerHTML = '';
+
+  // 创建固定文件夹项
   for (const folder of defaultFolders) {
-    const tab = document.createElement('div');
-    tab.className = 'folder-tab';
-    tab.dataset.folderId = folder.id;
-    tab.dataset.order = folder.order;
-    tab.dataset.name = folder.name;
-    tab.addEventListener('click', () => switchToFolder(folder.id));
-    tabsContainer.appendChild(tab);
+    const itemContainer = document.createElement('div');
+    itemContainer.className = 'pinned-folder-item-container';
+    itemContainer.dataset.folderId = folder.id;
+    itemContainer.dataset.order = folder.order;
+
+    const item = document.createElement('div');
+    item.className = 'pinned-folder-item';
+
+    const icon = document.createElement('span');
+    icon.className = 'material-icons';
+    icon.textContent = 'folder';
+
+    item.appendChild(icon);
+
+    const nameSpan = document.createElement('span');
+    nameSpan.textContent = folder.name;
+
+    itemContainer.appendChild(item);
+    itemContainer.appendChild(nameSpan);
+
+    // 点击事件
+    itemContainer.addEventListener('click', () => switchToFolder(folder.id));
+
+    pinnedFoldersContainer.appendChild(itemContainer);
   }
 
-  // 只调用一次更新书签树
+  // 更新书签树
   chrome.bookmarks.getTree(function (nodes) {
     bookmarkTreeNodes = nodes;
-    displayBookmarkCategories(bookmarkTreeNodes[0].children, 0, null, '1');
   });
 
-  // 如果有默认文件夹，激活第一个或上次访问的文件夹
+  // 激活文件夹
   if (defaultFolders.length > 0) {
     let folderToActivate;
-    
-    // 检查上次访问的文件夹是否在默认文件夹列表中
+
     if (lastViewedFolder && defaultFolders.some(f => f.id === lastViewedFolder)) {
       folderToActivate = lastViewedFolder;
     } else {
-      // 否则使用第一个默认文件夹
       folderToActivate = defaultFolders[0].id;
     }
 
-    // 激活选中的文件夹
-    const activeTab = document.querySelector(`.folder-tab[data-folder-id="${folderToActivate}"]`);
-    if (activeTab) {
-      activeTab.classList.add('active');
-      activeTab.style.transform = 'scale(1.2)';
+    const activeItem = pinnedFoldersContainer.querySelector(
+      `.pinned-folder-item-container[data-folder-id="${folderToActivate}"]`
+    );
+    if (activeItem) {
+      activeItem.classList.add('active');
     }
 
-    // 切换到选中的文件夹
     await switchToFolder(folderToActivate);
   } else {
-    // 当没有默认文件夹时，切换到根文件夹或其他指定文件夹
-    await switchToFolder('1'); // '1' 是根文件夹的 ID
+    await switchToFolder('1');
   }
 
-  // 重新初始化滚轮切换功能
+  // 重新初始化滚轮切换
   initWheelSwitching();
 
-  // 更新显示状态
-  updateDefaultFoldersTabsVisibility();
+  // 控制显示
+  const wrapper = pinnedFoldersContainer.parentElement;
+  if (wrapper) {
+    wrapper.style.display = defaultFolders.length > 0 ? 'flex' : 'none';
+  }
 
   return defaultFolders;
 }
+
+// 保持向后兼容
+const initDefaultFoldersTabs = initPinnedFolders;
+
 
 // 修改滚轮切换功能的实现
 function initWheelSwitching() {
@@ -1434,7 +1452,7 @@ function initWheelSwitching() {
         }
 
         // 获取当前激活的标签
-        const activeTab = document.querySelector('.folder-tab.active');
+        const activeTab = document.querySelector('.pinned-folder-item-container.active');
         if (!activeTab) {
           isProcessing = false;
           return;
@@ -1460,9 +1478,9 @@ function initWheelSwitching() {
         const nextFolder = defaultFolders.find(f => f.order === nextOrder);
         if (nextFolder) {
           await switchToFolder(nextFolder.id);
-          
+
           // 添加切换动画效果
-          const tabs = document.querySelectorAll('.folder-tab');
+          const tabs = document.querySelectorAll('.pinned-folder-item-container');
           tabs.forEach(tab => {
             if (tab.dataset.folderId === nextFolder.id) {
               tab.classList.add('switching');
@@ -1526,11 +1544,9 @@ async function switchToFolder(folderId) {
     }
 
     // 更新UI状态
-    document.querySelectorAll('.folder-tab').forEach(tab => {
+    document.querySelectorAll('.pinned-folder-item-container').forEach(tab => {
       const isActive = tab.dataset.folderId === folderId;
       tab.classList.toggle('active', isActive);
-      tab.style.transform = isActive ? 'scale(1.2)' : 'scale(1)';
-      tab.style.transition = 'transform 0.3s ease';
     });
 
     // 同步更新所有状态
@@ -3062,76 +3078,7 @@ function highlightBookmark(itemId) {
   }
 }
 
-// 修改 displayBookmarkCategories 函数，添加清理逻辑
-function displayBookmarkCategories(bookmarkNodes, level, parentUl, parentId) {
-  const categoriesList = parentUl || document.getElementById('categories-list');
-
-  // 如果是根级调用，先清空现有内容
-  if (!parentUl) {
-    categoriesList.innerHTML = '';
-  }
-
-  if (parentId === '1') {
-    categoriesList.style.display = 'block';
-  }
-
-  bookmarkNodes.forEach(function (bookmark) {
-    if (bookmark.children && bookmark.children.length > 0) {
-      let li = document.createElement('li');
-      li.className = 'cursor-pointer p-2 hover:bg-emerald-500 rounded-lg flex items-center folder-item';
-      li.style.paddingLeft = `${(level * 20) + 8}px`;
-      li.dataset.title = bookmark.title;
-      li.dataset.id = bookmark.id;
-
-      let span = document.createElement('span');
-      span.textContent = bookmark.title;
-
-      const folderIcon = document.createElement('span');
-      folderIcon.className = 'material-icons mr-2';
-      folderIcon.innerHTML = ICONS.folder;
-      li.insertBefore(folderIcon, li.firstChild);
-
-      const hasSubfolders = bookmark.children.some(child => child.children);
-      let arrowIcon;
-      if (hasSubfolders) {
-        arrowIcon = document.createElement('span');
-        arrowIcon.className = 'material-icons ml-auto';
-        arrowIcon.innerHTML = ICONS.chevron_right;
-        li.appendChild(arrowIcon);
-      }
-
-      let sublist = document.createElement('ul');
-      sublist.className = 'pl-4 space-y-2';
-      sublist.style.display = 'none';
-
-      li.addEventListener('click', function (event) {
-        event.stopPropagation();
-        if (hasSubfolders) {
-          let isExpanded = sublist.style.display === 'block';
-          sublist.style.display = isExpanded ? 'none' : 'block';
-          if (arrowIcon) {
-            arrowIcon.innerHTML = isExpanded ? ICONS.chevron_right : ICONS.expand_less;
-          }
-        }
-
-        document.querySelectorAll('#categories-list li').forEach(function (item) {
-          item.classList.remove('bg-emerald-500');
-        });
-        li.classList.add('bg-emerald-500');
-
-        updateBookmarksDisplay(bookmark.id);
-      });
-
-      li.appendChild(span);
-      categoriesList.appendChild(li);
-      categoriesList.appendChild(sublist);
-
-      displayBookmarkCategories(bookmark.children, level + 1, sublist, bookmark.id);
-    }
-  });
-
-  setupSortable();
-}
+// displayBookmarkCategories 函数已移除 (左侧书签栏功能已废弃)
 
 // 添加一个获取文件夹内书签数量的函数
 function getFolderBookmarkCount(folderId) {
@@ -3729,37 +3676,7 @@ document.addEventListener('DOMContentLoaded', function () {
     waitForFirstCategory(10);
   }
 
-  const toggleSidebarButton = document.getElementById('toggle-sidebar');
-  const sidebarContainer = document.getElementById('sidebar-container');
-
-  // 读保存的侧边栏状态
-  const isSidebarCollapsed = localStorage.getItem('sidebarCollapsed') === 'true';
-
-  // 初状
-  function setSidebarState(isCollapsed) {
-    if (isCollapsed) {
-      sidebarContainer.classList.add('collapsed');
-      toggleSidebarButton.textContent = '>';
-      toggleSidebarButton.style.left = '2rem'; // 收起时的位置
-    } else {
-      sidebarContainer.classList.remove('collapsed');
-      toggleSidebarButton.textContent = '<';
-      toggleSidebarButton.style.left = '14.75rem'; // 展开时的位置
-    }
-  }
-
-  // 应用初始状态
-  setSidebarState(isSidebarCollapsed);
-
-  // 切换侧边状态的函数
-  function toggleSidebar() {
-    const isCollapsed = sidebarContainer.classList.toggle('collapsed');
-    setSidebarState(isCollapsed);
-    localStorage.setItem('sidebarCollapsed', isCollapsed);
-  }
-
-  // 添加点击事件监听器
-  toggleSidebarButton.addEventListener('click', toggleSidebar);
+  // 侧边栏功能已移除
 
   document.addEventListener('click', function (event) {
     if (event.target.closest('#categories-list li')) {

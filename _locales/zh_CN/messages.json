@@ -271,6 +271,10 @@
         "message": "扩展",
         "description": "扩展链接标题"
     },
+    "bookmarksLinkTitle": {
+        "message": "书签管理",
+        "description": "书签管理链接标题"
+    },
     "settingsLinkTitle": {
         "message": "设置",
         "description": "设置链接标题"
@@ -767,6 +771,10 @@
     "showExtensionsLink": {
         "message": "显示扩展管理",
         "description": "显示扩展管理选项"
+    },
+    "showBookmarksLink": {
+        "message": "显示书签管理",
+        "description": "显示书签管理选项"
     },
     "searchTab": {
         "message": "搜索设置",

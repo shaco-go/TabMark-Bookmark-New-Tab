@@ -37,7 +37,7 @@
     },
     "confirmDeleteMessage": {
         "message": "Êtes-vous sûr de vouloir supprimer \"$1\" ?",
-        "description": "Message de confirmation de suppression d'un élément"
+        "description": "Message de confirmation pour la suppression d'un élément"
     },
     "confirmDeleteButton": {
         "message": "Supprimer",
@@ -102,10 +102,6 @@
     "folderDeleted": {
         "message": "Dossier supprimé : ID=$1, Titre=$2",
         "description": "Message de journal lorsque un dossier est supprimé"
-    },
-    "confirmDeleteMessage": {
-        "message": "Êtes-vous sûr de vouloir supprimer \"$1\" ?",
-        "description": "Message de confirmation pour la suppression d'un élément"
     },
     "morningGreeting": {
         "message": "Bonjour👋",
@@ -210,6 +206,10 @@
     "extensionsLinkTitle": {
         "message": "Extensions",
         "description": "Titre du lien des extensions"
+    },
+    "bookmarksLinkTitle": {
+        "message": "Gestionnaire de Favoris",
+        "description": "Titre du lien du gestionnaire de favoris"
     },
     "settingsLinkTitle": {
         "message": "Paramètres",
@@ -590,6 +590,10 @@
     "showExtensionsLink": {
         "message": "Afficher les Extensions",
         "description": "Option pour afficher le lien des extensions"
+    },
+    "showBookmarksLink": {
+        "message": "Afficher le Gestionnaire de Favoris",
+        "description": "Option pour afficher le lien du gestionnaire de favoris"
     },
     "searchTab": {
         "message": "Recherche",

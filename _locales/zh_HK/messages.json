@@ -259,6 +259,10 @@
         "message": "擴展",
         "description": "擴展連結標題"
     },
+    "bookmarksLinkTitle": {
+        "message": "書籤管理",
+        "description": "書籤管理連結標題"
+    },
     "settingsLinkTitle": {
         "message": "設置",
         "description": "設置連結標題"
@@ -736,6 +740,10 @@
     "showExtensionsLink": {
         "message": "顯示擴展管理",
         "description": "顯示擴展管理選項"
+    },
+    "showBookmarksLink": {
+        "message": "顯示書籤管理",
+        "description": "顯示書籤管理選項"
     },
     "searchTab": {
         "message": "搜尋設定",

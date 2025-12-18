@@ -33,34 +33,7 @@ main.flex-1 {
   z-index: 1;
 }
 
-/* 侧边栏 logo 和标题样式 */
-#sidebar-logo {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    align-items: center;
-    margin: 1rem auto 3rem 0.5rem;
-    gap: 0.5rem; /* 调整 logo 和文字之间的间距 */
-}
-
-#logo-image {
-    width: 40px;
-    height: 40px;
-}
-#logo-title {
-    font-size: 26px;
-    /* 调整字体大小 */
-    font-weight: bold;
-    color: #333;
-    /* 调整文字颜色 */
-}
-/* 确保原有的侧边栏内容样式不受影响 */
-#categories-list {
-    /* 保留原有的类别列表样式 */
-}
-
-/* 其他原有的样式 */
-/* ... */
+/* 侧边栏样式已移除 */
 
 .folder-name {
   display: flex;
@@ -98,19 +71,6 @@ main.flex-1 {
 
 .breadcrumb-item:last-child:hover {
   background-color: transparent;
-}
-
-#categories-list li {
-  user-select: none;
-}
-
-#categories-list li.sortable-ghost {
-  opacity: 0.5;
-  background-color: #f0f0f0;
-}
-
-#categories-list li.sortable-chosen {
-  background-color: #e0e0e0;
 }
 
 
@@ -163,16 +123,8 @@ main.flex-1 {
   border-color: #404040;
 }
 
-[data-theme="dark"] #logo-title {
-  border-color: #ffffff;
-  color: #ffffff;
-}
-[data-theme="dark"] aside ul li {
-  color: #ffffff;
-}
-[data-theme="dark"] aside ul li:hover {
-  color: #242424;
-}
+/* 暗色模式侧边栏样式已移除 */
+
 [data-theme="dark"] .bookmark-folder.card-title:hover {
   color: #ffffff;
 }
@@ -2146,3 +2098,107 @@ body .default-folders-tabs.sidebar-expanded {
     border-color: var(--primary-color, #10b981);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
+/* ========================================
+   固定文件夹样式 (替代小圆点)
+   ======================================== */
+
+/* 固定文件夹包装器 */
+.pinned-folders-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.pinned-folders-container {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  min-height: 80px;
+  overflow-x: auto;
+  padding: 10px 0;
+  max-width: 800px;
+}
+
+/* 固定文件夹项容器 */
+.pinned-folder-item-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 80px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.pinned-folder-item-container:hover {
+  transform: scale(1.05);
+}
+
+/* 圆形图标容器 */
+.pinned-folder-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  background-color: white;
+  border-radius: 50%;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.06), 0 2px 4px -2px rgb(0 0 0 / 0.06);
+  transition: all 0.2s;
+  border: 3px solid transparent;
+}
+
+.pinned-folder-item:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* 激活状态 */
+.pinned-folder-item-container.active .pinned-folder-item {
+  border-color: #10b981;
+  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
+}
+
+/* 文件夹图标 */
+.pinned-folder-item .material-icons {
+  font-size: 28px;
+  color: #717882;
+}
+
+.pinned-folder-item-container.active .material-icons {
+  color: #10b981;
+}
+
+/* 文件夹名称 */
+.pinned-folder-item-container > span {
+  margin-top: 8px;
+  font-size: 12px;
+  color: #717882;
+  text-align: center;
+  max-width: 80px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pinned-folder-item-container.active > span {
+  color: #10b981;
+  font-weight: 600;
+}
+
+/* 暗色模式 */
+[data-theme="dark"] .pinned-folder-item {
+  background-color: #2d3748;
+}
+
+[data-theme="dark"] .pinned-folder-item .material-icons {
+  color: #a0aec0;
+}
+
+[data-theme="dark"] .pinned-folder-item-container.active .material-icons {
+  color: #10b981;
+}
+
+[data-theme="dark"] .pinned-folder-item-container > span {
+  color: #a0aec0;
+}
+

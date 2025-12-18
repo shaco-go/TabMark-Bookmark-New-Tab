@@ -21,21 +21,7 @@
   <script type="module" src="search-engine-dropdown.js"></script>
 </head>
 <body class="h-screen flex flex-col">
-  <div id="sidebar-container" class="flex collapsed">
-    <aside class="custom-width p-4 overflow-auto border-r border-gray-200 relative">
-      <div id="sidebar-logo" class="mb-4">
-        <img src="../images/logo.svg" alt="Logo" id="logo-image">
-        <h1 id="logo-title">TabMark</h1>
-      </div>
-      <ul id="categories-list" class="space-y-2">
-        <li>
-          <div class="folder-tab" data-folder-id="123">
-            <div class="folder-icon">F</div>
-            <span class="folder-name">文件夹名称</span>
-          </div>
-        </li>
-      </ul>
-    </aside>
+  <div id="main-container" class="flex">
     <main class="flex-1 bg-gray-50 p-8 overflow-auto flex flex-col">
       <div class="welcome-search-container">
         <div id="welcome-message" data-i18n="welcomeMessage" style="visibility: hidden;"></div>
@@ -61,6 +47,12 @@
               </div>
             </div>
           </form>
+        </div>
+      </div>
+      <!-- 固定文件夹展示区域 (替代原来的小圆点) -->
+      <div class="pinned-folders-wrapper">
+        <div id="pinned-folders" class="pinned-folders-container">
+          <!-- 固定文件夹将由JavaScript动态生成 -->
         </div>
       </div>
       <div class="quick-links-wrapper">
@@ -89,12 +81,6 @@
           <div class="bookmark-placeholder"></div>
 
           <!-- 可以根据需要添加更多占位符 -->
-        </div>
-      </div>
-      <!-- 添加默认文件夹切换区域 -->
-      <div class="default-folders-tabs">
-        <div class="tabs-container">
-          <!-- 文件夹标签将通过JS动态生成 -->
         </div>
       </div>
       <!-- Edit Bookmark Dialog -->
@@ -159,6 +145,9 @@
     <a href="#extensions" id="extensions-link" data-i18n-title="extensionsLinkTitle">
       <span class="material-icons">extension</span>
     </a>
+    <a href="#bookmarks" id="bookmarks-link" data-i18n-title="bookmarksLinkTitle">
+      <span class="material-icons">bookmark</span>
+    </a>
   </div>
   <div class="settings-icon">
     <a href="#settings" id="settings-link" data-i18n-title="settingsLinkTitle">
@@ -195,8 +184,6 @@
           <button class="settings-tab-button" data-tab="bookmark-management" data-i18n="bookmarkManagementTab">书签管理</button>
           <button class="settings-tab-button" data-tab="wheel-switching" data-i18n="wheelSwitchingTab">滚轮切换</button>
           <button class="settings-tab-button" data-tab="shortcuts" data-i18n="shortcutsTab">快捷键</button>
-          <button class="settings-tab-button" data-tab="donate" data-i18n="donateTab">支持我们</button>
-          <button class="settings-tab-button" data-tab="about" data-i18n="aboutTab">关于</button>
         </div>
         <div class="settings-content">
           <div id="appearance-settings" class="settings-tab-content active">
@@ -347,6 +334,14 @@
                     <span class="slider round"></span>
                   </label>
                 </div>
+
+                <div class="setting-option">
+                  <label for="show-bookmarks-link" class="switch-label" data-i18n="showBookmarksLink">显示书签管理</label>
+                  <label class="switch">
+                    <input type="checkbox" id="show-bookmarks-link">
+                    <span class="slider round"></span>
+                  </label>
+                </div>
             </div>
           </div>
           <div id="search-settings" class="settings-tab-content">
@@ -483,63 +478,6 @@
                </div>
              </div>
            </div>
-           <div id="donate-settings" class="settings-tab-content">
-             <h3 class="settings-modal-subtitle" data-i18n="donateTitle">支持 TabMark 开发</h3>
-             <p class="donate-description" data-i18n="donateDescription">如果您觉得 TabMark 有用，请考虑支持它的持续开发。您的贡献将帮助我们改进扩展并添加新功能。</p>
-             
-             <div class="donate-options">
-               <!-- 微信赞赏码 -->
-               <div class="donate-option">
-                 <h4 class="donate-option-title" data-i18n="wechatDonateTitle">微信支付</h4>
-                 <div class="donate-qrcode-container">
-                   <img src="../images/wechat-donate.png" alt="WeChat Donate QR Code" class="donate-qrcode">
-                   <p class="donate-qrcode-text" data-i18n="scanQRCodeToDonate">扫描二维码赞赏</p>
-                 </div>
-               </div>
-             </div>
-             
-             <!-- 赞赏列表链接 - 独立区域 -->
-             <div class="donate-list-container">
-               <a href="https://cooing-loganberry-b74.notion.site/Tabmark-1af1ee1c3b3a80d7b268fda1c74f0404" target="_blank" class="donate-list-button">
-                 <span data-i18n="donateListLink">查看赞赏列表</span>
-               </a>
-             </div>
-             
-             <p class="donate-thank-you" data-i18n="thankYouForSupport">感谢您的支持！</p>
-           </div>
-           <div id="about-settings" class="settings-tab-content">
-             <h3 class="settings-modal-subtitle" data-i18n="aboutTitle">关于 TabMark</h3>
-             <div class="about-content">
-               <img src="../images/logo.svg" alt="TabMark Logo" class="about-logo">
-               <p class="about-version"></p>
-               <p class="about-description" data-i18n="aboutDescription">
-                 TabMark 是一个简洁、高效的书签管理扩展，帮助您更好地组织和访问您的网络收藏。
-               </p>
-               <div class="about-links">
-                 <a href="https://github.com/Alanrk/TabMark-Bookmark-New-Tab" target="_blank" class="about-link">
-                   <span class="material-icons">code</span>
-                   <span data-i18n="sourceCode">源代码</span>
-                 </a>
-                  <a href="https://x.com/thesowhale" class="about-link" target="_blank">
-                    <img src="../images/twitter-logo.png" alt="Twitter" class="twitter-icon">
-                    <span>Twitter</span>
-                  </a>
-                  <a href="mailto:hello@ainewtab.app" class="about-link" target="_blank">
-                    <span class="material-icons">feedback</span>
-                    <span data-i18n="feedback">邮箱</span>
-                  </a>
-                  <a href="https://cooing-loganberry-b74.notion.site/Tabmark-59054bd6e444458986d1fc61a383e095" class="about-link" target="_blank">
-                    <span class="material-icons">feedback</span>
-                    <span data-i18n="feedbacks">反馈建议</span>
-                  </a>
-                  <p class="official-website">
-                    <a href="https://www.ainewtab.app" target="_blank">
-                      <span data-i18n="officialWebsite">Official Website</span>: https://www.ainewtab.app
-                    </a>
-                  </p>
-               </div>
-             </div>
-           </div>
 
         </div>
       </div>
@@ -548,9 +486,6 @@
 
   <!-- 添加遮罩层 -->
   <div id="settings-overlay" class="settings-overlay"></div>
-  <button id="toggle-sidebar" class="bg-gray-300 p-1 rounded-r-md">
-    &gt;
-  </button>
   <div id="confirm-dialog" class="modal">
     <div class="modal-content">
       <h2 id="confirm-dialog-title" data-i18n="confirmDeleteTitle">确认删除</h2>
@@ -626,5 +561,19 @@
       </div>
     </div>
   </div>
+  <script>
+  // 书签管理链接点击事件处理
+  document.addEventListener('DOMContentLoaded', () => {
+    const bookmarksLink = document.getElementById('bookmarks-link');
+    if (bookmarksLink) {
+      bookmarksLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        const isEdge = navigator.userAgent.includes('Edg');
+        const url = isEdge ? 'edge://favorites/' : 'chrome://bookmarks/';
+        chrome.tabs.create({ url });
+      });
+    }
+  });
+  </script>
 </body>
 </html>
