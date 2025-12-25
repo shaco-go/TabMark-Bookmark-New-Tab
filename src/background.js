@@ -733,23 +733,6 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       handleOpenMultipleTabsAndGroup(request, sendResponse);
       return true;
 
-    case 'updateFloatingBallSetting':
-      chrome.tabs.query({}, (tabs) => {
-        tabs.forEach((tab) => {
-          try {
-            chrome.tabs.sendMessage(tab.id, {
-              action: 'updateFloatingBall',
-              enabled: request.enabled
-            });
-          } catch (error) {
-            console.error('Error sending message to tab:', error);
-          }
-        });
-      });
-      chrome.storage.sync.set({ enableFloatingBall: request.enabled });
-      sendResponse({ success: true });
-      return true;
-
     case 'openSidePanel':
       toggleSidePanel();
       sendResponse({ success: true });

@@ -87,10 +87,6 @@
         "message": "外观",
         "description": "外观设置标签名"
     },
-    "floatingBallTab": {
-        "message": "悬浮球设置",
-        "description": "悬浮球设置标签名"
-    },
     "languageTab": {
         "message": "语言",
         "description": "语言设置标签名"
@@ -98,18 +94,6 @@
     "backgroundColorTitle": {
         "message": "背景颜色",
         "description": "背景颜色设置标题"
-    },
-    "floatingBallSettingsTitle": {
-        "message": "悬浮球设置",
-        "description": "悬浮球设置标题"
-    },
-    "floatingBallDescription": {
-        "message": "开启悬浮球后会在页面右上角显示一个可点击的悬浮图标，用于快速访问搜索引擎和书签。",
-        "description": "悬浮球功能描述"
-    },
-    "enableFloatingBall": {
-        "message": "开启悬浮球",
-        "description": "开启悬浮球的标签"
     },
     "languageSettingsTitle": {
         "message": "语言 / Language",
@@ -235,25 +219,9 @@
         "message": "外观",
         "description": "外观设置标签"
     },
-    "floatingBallTab": {
-        "message": "悬浮球",
-        "description": "悬浮球设置标签"
-    },
     "backgroundColorTitle": {
         "message": "背景颜色",
         "description": "背景颜色设置标题"
-    },
-    "floatingBallSettingsTitle": {
-        "message": "悬浮球设置",
-        "description": "悬浮球设置标题"
-    },
-    "floatingBallDescription": {
-        "message": "开启悬浮球后会在页面右上角显示一个可点击的悬浮图标，用于快速访问搜索引擎和书签。",
-        "description": "悬浮球功能描述"
-    },
-    "enableFloatingBall": {
-        "message": "启用悬浮球",
-        "description": "启用悬浮球选项"
     },
     "historyLinkTitle": {
         "message": "历史记录",
@@ -487,34 +455,6 @@
     "openBookmarkCleanup": {
         "message": "打开书签清理工具",
         "description": "打开书签清理工具按钮文本"
-    },
-    "floatingBallClickTip": {
-        "message": "点击",
-        "description": "悬浮球点击提示"
-    },
-    "floatingBallClickDesc": {
-        "message": "打开快速搜索",
-        "description": "悬浮球点击功能描述"
-    },
-    "floatingBallAltClickTip": {
-        "message": "Alt + 点击",
-        "description": "悬浮球 Alt+点击提示"
-    },
-    "floatingBallAltClickDesc": {
-        "message": "打开侧边栏",
-        "description": "悬浮球 Alt+点击功能描述"
-    },
-    "floatingBallShortcutTip": {
-        "message": "Alt/Command + B",
-        "description": "悬浮球快捷键提示"
-    },
-    "floatingBallShortcutDesc": {
-        "message": "快捷键打开侧边栏",
-        "description": "悬浮球快捷键功能描述"
-    },
-    "doNotShowAgain": {
-        "message": "不再显示此提示",
-        "description": "不再显示提示的按钮文本"
     },
     "linkOpeningTab": {
         "message": "链接打开方式",

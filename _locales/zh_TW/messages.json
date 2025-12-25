@@ -91,10 +91,6 @@
         "message": "外觀",
         "description": "外觀設定標籤"
     },
-    "floatingBallTab": {
-        "message": "懸浮球",
-        "description": "懸浮球設定標籤"
-    },
     "languageTab": {
         "message": "語言",
         "description": "語言設定標籤名"
@@ -102,18 +98,6 @@
     "backgroundColorTitle": {
         "message": "背景顏色",
         "description": "背景顏色設定標題"
-    },
-    "floatingBallSettingsTitle": {
-        "message": "懸浮球設定",
-        "description": "懸浮球設定標題"
-    },
-    "floatingBallDescription": {
-        "message": "開啟懸浮球後會在頁面右上角顯示一個可點擊的懸浮圖示，用於快速訪問搜尋引擎和書籤。",
-        "description": "懸浮球功能描述"
-    },
-    "enableFloatingBall": {
-        "message": "啟用懸浮球",
-        "description": "啟用懸浮球選項"
     },
     "languageSettingsTitle": {
         "message": "語言 / Language",
@@ -422,34 +406,6 @@
     "openBookmarkCleanup": {
         "message": "開啟書籤清理工具",
         "description": "開啟書籤清理工具按鈕文字"
-    },
-    "floatingBallClickTip": {
-        "message": "點擊",
-        "description": "浮動球點擊提示"
-    },
-    "floatingBallClickDesc": {
-        "message": "開啟快速搜尋",
-        "description": "浮動球點擊功能描述"
-    },
-    "floatingBallAltClickTip": {
-        "message": "Alt + 點擊",
-        "description": "浮動球Alt+點擊提示"
-    },
-    "floatingBallAltClickDesc": {
-        "message": "開啟側邊欄",
-        "description": "浮動球Alt+點擊功能描述"
-    },
-    "floatingBallShortcutTip": {
-        "message": "Alt/Command + B",
-        "description": "浮動球快捷鍵提示"
-    },
-    "floatingBallShortcutDesc": {
-        "message": "開啟側邊欄的快捷鍵",
-        "description": "浮動球快捷鍵功能描述"
-    },
-    "doNotShowAgain": {
-        "message": "不再顯示",
-        "description": "關閉提示框的按鈕文字"
     },
     "linkOpeningTab": {
         "message": "連結開啟",

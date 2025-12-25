@@ -131,15 +131,6 @@ class SettingsManager {
       option.addEventListener('click', () => this.handleBackgroundChange(option));
     });
 
-    // 悬浮球设置
-    if (this.enableFloatingBallCheckbox) {
-      this.enableFloatingBallCheckbox.addEventListener('change', () => {
-        chrome.storage.sync.set({
-          enableFloatingBall: this.enableFloatingBallCheckbox.checked
-        });
-      });
-    }
-    
     // 添加键盘事件监听，按ESC关闭侧边栏
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && this.settingsSidebar && this.settingsSidebar.classList.contains('open')) {
@@ -262,13 +253,6 @@ class SettingsManager {
   }
 
   loadSavedSettings() {
-    // 加载悬浮球设置（只在侧边栏页面存在）
-    if (this.enableFloatingBallCheckbox) {
-      chrome.storage.sync.get(['enableFloatingBall'], (result) => {
-        this.enableFloatingBallCheckbox.checked = result.enableFloatingBall !== false;
-      });
-    }
-
     // 加载背景设置
     const savedBg = localStorage.getItem('selectedBackground');
     if (savedBg) {

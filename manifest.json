@@ -40,10 +40,6 @@
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["src/content.js"]
-    },
-    {
-      "matches": ["<all_urls>"],
       "js": ["src/sidepanel-navigation.js"],
       "run_at": "document_end"
     }

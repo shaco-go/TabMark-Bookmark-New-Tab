@@ -171,25 +171,9 @@
         "message": "Aussehen",
         "description": "Tab für die Erscheinungseinstellungen"
     },
-    "floatingBallTab": {
-        "message": "Schwebender Ball",
-        "description": "Tab für die Einstellungen des schwebenden Balls"
-    },
     "backgroundColorTitle": {
         "message": "Hintergrundfarbe",
         "description": "Titel für die Einstellungen der Hintergrundfarbe"
-    },
-    "floatingBallSettingsTitle": {
-        "message": "Einstellungen des schwebenden Balls",
-        "description": "Titel für die Einstellungen des schwebenden Balls"
-    },
-    "floatingBallDescription": {
-        "message": "Wenn aktiviert, erscheint ein anklickbares schwebendes Symbol in der oberen rechten Ecke der Seite für den schnellen Zugriff auf Suchmaschinen und Lesezeichen.",
-        "description": "Beschreibung der Funktion des schwebenden Balls"
-    },
-    "enableFloatingBall": {
-        "message": "Schwebenden Ball aktivieren",
-        "description": "Option zum Aktivieren des schwebenden Balls"
     },
     "historyLinkTitle": {
         "message": "Verlauf",
@@ -414,34 +398,6 @@
     "openBookmarkCleanup": {
         "message": "Lesezeichen-Aufräumen-Tool öffnen",
         "description": "Button-Text zum Öffnen des Lesezeichen-Aufräumen-Tools"
-    },
-    "floatingBallClickTip": {
-        "message": "Klicken",
-        "description": "Schwebender Ball Klick-Tipp"
-    },
-    "floatingBallClickDesc": {
-        "message": "Schnellsuche öffnen",
-        "description": "Schwebender Ball Klick-Funktionsbeschreibung"
-    },
-    "floatingBallAltClickTip": {
-        "message": "Alt + Klick",
-        "description": "Schwebender Ball Alt+Klick-Tipp"
-    },
-    "floatingBallAltClickDesc": {
-        "message": "Seitenleiste öffnen",
-        "description": "Schwebender Ball Alt+Klick-Funktionsbeschreibung"
-    },
-    "floatingBallShortcutTip": {
-        "message": "Alt/Command + B",
-        "description": "Schwebender Ball Tastenkombination-Tipp"
-    },
-    "floatingBallShortcutDesc": {
-        "message": "Tastenkombination zum Öffnen der Seitenleiste",
-        "description": "Schwebender Ball Tastenkombination-Funktionsbeschreibung"
-    },
-    "doNotShowAgain": {
-        "message": "Nicht mehr anzeigen",
-        "description": "Button-Text zum Ausblenden des Tooltips"
     },
     "linkOpeningTab": {
         "message": "Link-Öffnung",

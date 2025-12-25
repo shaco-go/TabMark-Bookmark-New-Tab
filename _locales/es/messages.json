@@ -171,25 +171,9 @@
         "message": "Apariencia",
         "description": "Pestaña de configuraciones de apariencia"
     },
-    "floatingBallTab": {
-        "message": "Bola flotante",
-        "description": "Pestaña de configuraciones de la bola flotante"
-    },
     "backgroundColorTitle": {
         "message": "Color de fondo",
         "description": "Título de configuraciones de color de fondo"
-    },
-    "floatingBallSettingsTitle": {
-        "message": "Configuraciones de la bola flotante",
-        "description": "Título de configuraciones de la bola flotante"
-    },
-    "floatingBallDescription": {
-        "message": "Cuando está habilitado, un icono flotante clicable aparecerá en la esquina superior derecha de la página para un acceso rápido a los motores de búsqueda y marcadores.",
-        "description": "Descripción de la función de la bola flotante"
-    },
-    "enableFloatingBall": {
-        "message": "Habilitar bola flotante",
-        "description": "Opción para habilitar la bola flotante"
     },
     "historyLinkTitle": {
         "message": "Historial",
@@ -386,34 +370,6 @@
     "openBookmarkCleanup": {
         "message": "Abrir Herramienta de Limpieza de Marcadores",
         "description": "Texto del botón para abrir la herramienta de limpieza de marcadores"
-    },
-    "floatingBallClickTip": {
-        "message": "Clic",
-        "description": "Consejo de clic en la bola flotante"
-    },
-    "floatingBallClickDesc": {
-        "message": "Abrir búsqueda rápida",
-        "description": "Descripción de la función de clic en la bola flotante"
-    },
-    "floatingBallAltClickTip": {
-        "message": "Alt + Clic",
-        "description": "Consejo de Alt+clic en la bola flotante"
-    },
-    "floatingBallAltClickDesc": {
-        "message": "Abrir panel lateral",
-        "description": "Descripción de la función Alt+clic en la bola flotante"
-    },
-    "floatingBallShortcutTip": {
-        "message": "Alt/Command + B",
-        "description": "Consejo de atajo de la bola flotante"
-    },
-    "floatingBallShortcutDesc": {
-        "message": "Atajo para abrir el panel lateral",
-        "description": "Descripción de la función de atajo de la bola flotante"
-    },
-    "doNotShowAgain": {
-        "message": "No mostrar de nuevo",
-        "description": "Texto del botón para descartar el tooltip"
     },
     "linkOpeningTab": {
         "message": "Apertura de Enlaces",

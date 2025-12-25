@@ -171,25 +171,9 @@
         "message": "Apparence",
         "description": "Onglet des paramètres d'apparence"
     },
-    "floatingBallTab": {
-        "message": "Boule flottante",
-        "description": "Onglet des paramètres de la boule flottante"
-    },
     "backgroundColorTitle": {
         "message": "Couleur de fond",
         "description": "Titre des paramètres de la couleur de fond"
-    },
-    "floatingBallSettingsTitle": {
-        "message": "Paramètres de la boule flottante",
-        "description": "Titre des paramètres de la boule flottante"
-    },
-    "floatingBallDescription": {
-        "message": "Lorsqu'elle est activée, une icône flottante cliquable apparaîtra dans le coin supérieur droit de la page pour un accès rapide aux moteurs de recherche et aux favoris.",
-        "description": "Description de la fonctionnalité de la boule flottante"
-    },
-    "enableFloatingBall": {
-        "message": "Activer la boule flottante",
-        "description": "Option pour activer la boule flottante"
     },
     "historyLinkTitle": {
         "message": "Historique",
@@ -386,34 +370,6 @@
     "openBookmarkCleanup": {
         "message": "Ouvrir l'Outil de Nettoyage des Favoris",
         "description": "Texte du bouton pour ouvrir l'outil de nettoyage des favoris"
-    },
-    "floatingBallClickTip": {
-        "message": "Clic",
-        "description": "Conseil de clic sur la boule flottante"
-    },
-    "floatingBallClickDesc": {
-        "message": "Ouvrir la recherche rapide",
-        "description": "Description de la fonction de clic sur la boule flottante"
-    },
-    "floatingBallAltClickTip": {
-        "message": "Alt + Clic",
-        "description": "Conseil d'Alt+clic sur la boule flottante"
-    },
-    "floatingBallAltClickDesc": {
-        "message": "Ouvrir le panneau latéral",
-        "description": "Description de la fonction Alt+clic sur la boule flottante"
-    },
-    "floatingBallShortcutTip": {
-        "message": "Alt/Command + B",
-        "description": "Conseil de raccourci de la boule flottante"
-    },
-    "floatingBallShortcutDesc": {
-        "message": "Raccourci pour ouvrir le panneau latéral",
-        "description": "Description de la fonction de raccourci de la boule flottante"
-    },
-    "doNotShowAgain": {
-        "message": "Ne plus afficher",
-        "description": "Texte du bouton pour fermer l'infobulle"
     },
     "linkOpeningTab": {
         "message": "Ouverture des Liens",
